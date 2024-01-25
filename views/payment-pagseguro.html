@@ -1,0 +1,36 @@
+<form method="post" action="https://pagseguro.uol.com.br/checkout/checkout.jhtml">
+    <input type="hidden" name="email_cobranca" value="suporte@lojamodelo.com.br">
+    <input type="hidden" name="tipo" value="CP">
+    <input type="hidden" name="moeda" value="BRL">
+
+    {loop="$products"}
+    <input type="hidden" name="item_id_{$counter+1}" value="{$value.idproduct}">
+    <input type="hidden" name="item_descr_{$counter+1}" value="{$value.desproduct}">
+    <input type="hidden" name="item_quant_{$counter+1}" value="{$value.nrqtd}">
+    <input type="hidden" name="item_valor_{$counter+1}" value="{$value.vltotal}">
+    <input type="hidden" name="item_frete_{$counter+1}" value="1">
+    <input type="hidden" name="item_peso_{$counter+1}" value="{$value.vlheight*1000}">
+    {/loop}
+
+    <input type="hidden" name="reference" value="{$order.idorder}">
+    
+    <!-- INÍCIO DOS DADOS DO USUÁRIO -->
+    <input type="hidden" name="cliente_nome" value="{function="utf8_encode($order.desperson)"}">
+    <input type="hidden" name="cliente_cep" value="{$order.deszipcode}">
+    <input type="hidden" name="cliente_end" value="{function="utf8_encode($order.desaddress)"}">
+    <input type="hidden" name="cliente_num" value="{$order.desnumber}">
+    <input type="hidden" name="cliente_compl" value="{function="utf8_encode($order.descomplement)"}">
+    <input type="hidden" name="cliente_bairro" value="{function="utf8_encode($order.desdistrict)"}">
+    <input type="hidden" name="cliente_cidade" value="{function="utf8_encode($order.descity)"}">
+    <input type="hidden" name="cliente_uf" value="{$order.desstate}">
+    <input type="hidden" name="cliente_pais" value="{$order.descountry}">
+    <input type="hidden" name="cliente_ddd" value="{$phone.areaCode}">
+    <input type="hidden" name="cliente_tel" value="{$phone.number}">
+    <input type="hidden" name="cliente_email" value="{$order.desemail}">
+    <!-- FIM DOS DADOS DO USUÁRIO -->
+    
+</form>
+
+<script type="text/javascript">
+    document.forms[0].submit();
+</script>
